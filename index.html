@@ -1,0 +1,91 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Loop Animasyonu</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-gray-100 flex flex-col items-center">
+  <div class="container mx-auto mt-8">
+    <div class="flex flex-col items-center">
+      <h1 class="bg-green-600 block font-semibold mb-14 px-3 py-3 rounded text-2xl text-white">Asynchronous Node.js</h1>
+      <div class="flex">
+        <div class="w-1/3 px-4">
+          <h2 class="text-2xl font-semibold mb-2">Kod</h2>
+          <pre class="bg-gray-800 text-white p-4 rounded mb-4 overflow-auto">
+<code>console.log("Starting");</code>
+<code>setTimeout(() => {</code>
+<code>  console.log("2 Second Timer");</code>
+<code>}, 2000);</code>
+<code></code>
+<code>setTimeout(() => {</code>
+<code>  console.log("0 Second Timer");</code>
+<code>}, 0);</code>
+<code></code>
+<code>console.log("Stopping");</code>
+                    </pre>
+          <div
+            class="console-output bg-white border border-gray-300 rounded p-4 w-full h-48 overflow-y-auto"
+          >
+            <h2 class="text-2xl font-semibold mb-2">Console Output</h2>
+            <div id="consoleOutput" class="text-lg"></div>
+          </div>
+        </div>
+        <div class="w-2/3 px-4">
+          <h2 class="text-2xl font-semibold mb-2">Animasyon</h2>
+          <div class="flex justify-around mb-4">
+            <div
+              class="box call-stack border border-gray-300 rounded p-4 w-1/3 min-h-48 bg-white relative"
+            >
+              <div class="bottom-2 left-2 right-2 text-lg rounded bg-blue-500 p-4 text-white mb-4">
+                Call Stack, JavaScript'in çalıştırma bağlamlarını izlediği veri
+                yapısıdır. Her işlev çağrıldığında yığına eklenir ve işlev
+                tamamlandığında yığından çıkarılır.
+              </div>
+              <h3 class="text-center text-2xl font-semibold mb-2">Call Stack</h3>
+              <div id="callStack" class="text-lg text-center bg-yellow-500"></div>
+            </div>
+            <div
+              class="box event-loop flex flex-col items-center border border-gray-300 rounded p-4 w-1/3 min-h-48 bg-white relative"
+            >
+              <div class="bottom-2 left-2 right-2 text-lg rounded bg-blue-500 p-4 text-white mb-4">
+                Event Loop, Call Stack'in boş olup olmadığını kontrol eder ve
+                boş olduğunda Event Queue'dan görevleri alır ve Call Stack'e
+                ekler.
+              </div>
+              <h3 class="text-center text-2xl font-semibold mb-2">Event Loop</h3>
+              <div class="arrow text-3xl mt-2">⮂</div>
+            </div>
+            <div
+              class="box event-queue border border-gray-300 rounded p-4 w-1/3 min-h-48 bg-white relative"
+            >
+              <div class="bottom-2 left-2 right-2 text-lg rounded bg-blue-500 p-4 text-white mb-4">
+                Event Queue, asenkron görevlerin sıraya alındığı yerdir. Bu
+                görevler, Call Stack boşaldığında Event Loop tarafından Call
+                Stack'e taşınır.
+              </div>
+              <h3 class="text-center text-2xl font-semibold mb-2">
+                Event Queue
+              </h3>
+              <div id="eventQueue" class="text-lg text-center bg-yellow-500"></div>
+            </div>
+          </div>
+          <button
+            id="nextButton"
+            class="mt-6 px-4 py-2 text-2xl bg-gray-700 text-white rounded hover:bg-blue-600"
+          >
+            Sonraki Adım
+          </button>
+          <div
+            id="description"
+            class="description mt-6 p-4 w-full border border-gray-300 text-xl rounded bg-white text-center"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
